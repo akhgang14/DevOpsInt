@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Login</title>
+  <style>
+    /* Reset and Core Layout */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* Login Card container */
+    .login-container {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .login-header {
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .login-header h2 {
+      color: #333333;
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .login-header p {
+      color: #666666;
+      font-size: 14px;
+    }
+
+    /* Input Fields */
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 6px;
+      color: #444444;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #cccccc;
+      border-radius: 6px;
+      font-size: 16px;
+      transition: border-color 0.2s;
+    }
+
+    .input-group input:focus {
+      border-color: #0066cc;
+      outline: none;
+    }
+
+    /* Utilities (Remember Me & Forgot Pass) */
+    .form-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .forgot-link {
+      color: #0066cc;
+      text-decoration: none;
+    }
+
+    .forgot-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Submit Button */
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      background: #0066cc;
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .submit-btn:hover {
+      background: #0052a3;
+    }
+
+    /* Message banner for display errors/success */
+    .message {
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      font-size: 14px;
+      display: none;
+      text-align: center;
+    }
+
+    .message.error {
+      display: block;
+      background: #ffebe9;
+      color: #dd2222;
+      border: 1px solid #ffcccc;
+    }
+
+    .message.success {
+      display: block;
+      background: #e6f4ea;
+      color: #137333;
+      border: 1px solid #c2e7cb;
+    }
+
+    /* Footer text */
+    .login-footer {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 14px;
+      color: #666666;
+    }
+
+    .login-footer a {
+      color: #0066cc;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .login-footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <div class="login-header">
+      <h2>Welcome Back</h2>
+      <p>Please enter your credentials to login</p>
+    </div>
+
+    <!-- Feedback message box -->
+    <div id="messageBox" class="message"></div>
+
+    <form id="loginForm" onsubmit="handleLogin(event)">
+      <div class="input-group">
+        <label for="username">Username or Email</label>
+        <input type="text" id="username" required placeholder="e.g., alex123">
+      </div>
+
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" required placeholder="••••••••">
+      </div>
+
+      <div class="form-actions">
+        <label class="remember-me">
+          <input type="checkbox" id="rememberMe"> Remember me
+        </label>
+        <a href="#" class="forgot-link">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="submit-btn">Log In</button>
+    </form>
+
+    <div class="login-footer">
+      Don't have an account? <a href="#">Sign up</a>
+    </div>
+  </div>
+
+  <script>
+    function handleLogin(event) {
+      // Prevent standard browser refresh on submission
+      event.preventDefault();
+
+      const usernameInput = document.getElementById('username').value.trim();
+      const passwordInput = document.getElementById('password').value;
+      const messageBox = document.getElementById('messageBox');
+
+      // Reset message box appearance
+      messageBox.className = "message";
+      messageBox.innerText = "";
+
+      // Dummy local logic check (Replace this with real backend API request)
+      if (usernameInput === "admin" && passwordInput === "password123") {
+        messageBox.classList.add("success");
+        messageBox.innerText = "Login successful! Redirecting...";
+        
+        // Simulating redirect
+        setTimeout(() => {
+          alert("Redirecting to your dashboard...");
+        }, 1000);
+      } else {
+        messageBox.classList.add("error");
+        messageBox.innerText = "Invalid username or password.";
+      }
+    }
+  </script>
+
+</body>
+</html>
